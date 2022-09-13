@@ -22,9 +22,12 @@
               <tr class="hover:bg-grey-lighter">
                 <td class="py-4 px-6 border-b border-grey-light">
                   <a href="{{ route('tweet.show',$tweet->id) }}">
+                    <!-- 🔽 追加 -->
+                    <p class="text-left text-grey-dark">{{$tweet->user->name}}</p>
                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$tweet->tweet}}</h3>
                   </a>
                   <div class="flex">
+                    @if ($tweet->user_id === Auth::user()->id)
                     <!-- 更新ボタン -->
                     <form action="{{ route('tweet.edit',$tweet->id) }}" method="GET" class="text-left">
                       @csrf
@@ -44,6 +47,7 @@
                         </svg>
                       </button>
                     </form>
+                    @endif
                   </div>
                 </td>
               </tr>
@@ -55,3 +59,4 @@
     </div>
   </div>
 </x-app-layout>
+
