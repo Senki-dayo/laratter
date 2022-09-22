@@ -21,10 +21,14 @@
               @foreach ($tweets as $tweet)
               <tr class="hover:bg-grey-lighter">
                 <td class="py-4 px-6 border-b border-grey-light">
-
-                  <!-- 🔽 ここから編集 -->
                   <div class="flex">
-                    <p class="text-left text-grey-dark">{{$tweet->user->name}}</p>
+
+                    <!-- 🔽 編集 -->
+                    <a href="{{ route('follow.show', $tweet->user->id) }}">
+                      <p class="text-left text-grey-dark">{{$tweet->user->name}}</p>
+                    </a>
+                    <!-- 🔼 ここまで -->
+
                     <!-- follow 状態で条件分岐 -->
                     @if(Auth::user()->followings()->where('users.id', $tweet->user->id)->exists())
                     <!-- unfollow ボタン -->
@@ -50,7 +54,6 @@
                     </form>
                     @endif
                   </div>
-                  <!-- 🔼 ここまで編集 -->
 
                   <a href="{{ route('tweet.show',$tweet->id) }}">
                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$tweet->tweet}}</h3>
